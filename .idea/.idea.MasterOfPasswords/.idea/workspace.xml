@@ -7,29 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b132689e-0fe2-46e9-a59e-9c008023f731" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/App/IPasswordManagerApp.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/App/PasswordManagerApp.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/Authorization/IValidator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/Authorization/Validator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/Commands/ConsoleManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/Commands/IConsoleManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/Commands/MenuHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/Encryption/Encryptor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/Encryption/IEncryptor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/MasterOfPasswords.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/PasswordSetter/IPasswordEntry.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/PasswordSetter/PasswordEntry.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/Storage/DataStorage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/Storage/IDataStorage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/Storage/IPasswordStore.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/Storage/PasswordStore.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/User/IUser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MasterOfPasswords/User/User.cs" afterDir="false" />
-    </list>
+    <list default="true" id="b132689e-0fe2-46e9-a59e-9c008023f731" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,9 +29,12 @@
   }
 }]]></component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/EncryptorTests/EncryptorTests.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/TestProject1/UnitTest1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../PasswordManager/PasswordManager/Tests/EncryptorTests/EncryptorTests.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 1
 }]]></component>
@@ -76,7 +57,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected=".NET Project.MasterOfPasswords">
     <configuration name="MasterOfPasswords" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -104,12 +85,27 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1730487863733</updated>
-      <workItem from="1730487864818" duration="661000" />
+      <workItem from="1730487864818" duration="3014000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnitTestsCoverage.Settings">
+    <option name="coveragePercentColumnWidth" value="150" />
+    <option name="sortOrder" value="DESCENDING" />
+    <option name="sortedColumn" value="1" />
+    <option name="symbolColumnWidth" value="142" />
+    <coverage-tree-state>
+      <expand>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 70% 87/291" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+      </expand>
+      <select />
+    </coverage-tree-state>
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
