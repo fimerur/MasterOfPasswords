@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MasterOfPasswords\MasterOfPasswords.csproj" />
+      <ProjectReference Include="..\..\MasterOfPasswords\MasterOfPasswords.csproj" />
     </ItemGroup>
 
 </Project>
