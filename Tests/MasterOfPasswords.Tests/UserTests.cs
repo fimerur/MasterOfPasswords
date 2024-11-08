@@ -1,6 +1,4 @@
-using MasterOfPasswords.User;
-
-namespace UserTests;
+namespace MasterOfPasswords.Tests;
 
 public class UserTests
 {
@@ -9,7 +7,7 @@ public class UserTests
     {
         // Arrange
         var masterPassword = "correct_password";
-        var user = new User(masterPassword);
+        var user = new User.User(masterPassword);
 
         // Act
         var result = user.Authenticate("correct_password");
@@ -23,7 +21,7 @@ public class UserTests
     {
         // Arrange
         var masterPassword = "correct_password";
-        var user = new User(masterPassword);
+        var user = new User.User(masterPassword);
 
         // Act
         var result = user.Authenticate("wrong_password");

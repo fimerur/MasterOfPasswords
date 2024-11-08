@@ -1,43 +1,57 @@
 using MasterOfPasswords.Encryption;
 using MasterOfPasswords.PasswordSetter;
-using Newtonsoft.Json;
+using MasterOfPasswords.Postgres;
+using Microsoft.EntityFrameworkCore;
 
 namespace MasterOfPasswords.Storage;
 
 public class DataStorage : IDataStorage
 {
-    private const string FilePath = "/Users/Fimeru/Desktop/PM storage/passwords.json";
+    private readonly ApplicationDbContext _dbContext;
+
+    public DataStorage(ApplicationDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
 
     public async Task SaveAsync(List<PasswordEntry> passwordList)
     {
-        var json = JsonConvert.SerializeObject(passwordList, Formatting.Indented);
-        await File.WriteAllTextAsync(FilePath, json);
+        _dbContext.Credentials.RemoveRange(_dbContext.Credentials);
+        await _dbContext.SaveChangesAsync();
+        
+        var dbCredentials = passwordList.Select(entry => entry.ToDbCredential()).ToList();
+        await _dbContext.Credentials.AddRangeAsync(dbCredentials);
+        await _dbContext.SaveChangesAsync();
     }
 
     public async Task<List<PasswordEntry>> LoadAsync()
     {
-        if (!File.Exists(FilePath))
-            return new List<PasswordEntry>();
-
-        var json = await File.ReadAllTextAsync(FilePath);
-        return JsonConvert.DeserializeObject<List<PasswordEntry>>(json) ?? new List<PasswordEntry>();
+        var dbCredentials = await _dbContext.Credentials.ToListAsync();
+        return dbCredentials.Select(PasswordEntry.FromDbCredential).ToList();
     }
 
     public async Task<PasswordEntry?> FindPasswordInFileAsync(string login)
     {
-        var passwordList = await LoadAsync();
-        return passwordList.FirstOrDefault(p => p.Login == login);
+        var dbCredential = await _dbContext.Credentials
+            .Where(c => c.Login == login)
+            .FirstOrDefaultAsync();
+
+        return dbCredential == null ? null : PasswordEntry.FromDbCredential(dbCredential);
     }
 
     public async Task UpdatePasswordInFileAsync(string login, string newPassword, IEncryptor encryptor)
     {
-        var passwordList = await LoadAsync();
-        var entry = passwordList.FirstOrDefault(p => p.Login == login);
+        var dbCredential = await _dbContext.Credentials
+            .Where(c => c.Login == login)
+            .FirstOrDefaultAsync();
 
-        if (entry != null)
+        if (dbCredential != null)
         {
+            var entry = PasswordEntry.FromDbCredential(dbCredential);
             entry.SetEncryptedPassword(newPassword, encryptor);
-            await SaveAsync(passwordList);
+
+            dbCredential.Password = entry.EncryptedPassword;
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

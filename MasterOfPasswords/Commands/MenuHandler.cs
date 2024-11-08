@@ -4,13 +4,13 @@ namespace MasterOfPasswords.Commands
 {
     public class MenuHandler
     {
-        private readonly IPasswordManagerApp _passwordManagerApp; // Используем интерфейс
-        private readonly IConsoleManager _consoleManager; // Добавлен интерфейс для консоли
+        private readonly IPasswordManagerApp _passwordManagerApp;
+        private readonly IConsoleManager _consoleManager;
 
         public MenuHandler(IPasswordManagerApp passwordManagerApp, IConsoleManager consoleManager)
         {
-            _passwordManagerApp = passwordManagerApp; // Заменено на интерфейс
-            _consoleManager = consoleManager; // Передаем интерфейс
+            _passwordManagerApp = passwordManagerApp;
+            _consoleManager = consoleManager;
         }
 
         public async Task DisplayMenuAsync()

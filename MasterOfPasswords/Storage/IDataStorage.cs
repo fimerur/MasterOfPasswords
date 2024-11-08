@@ -5,9 +5,9 @@ namespace MasterOfPasswords.Storage
 {
     public interface IDataStorage
     {
-        Task SaveAsync(List<PasswordEntry> passwordList); // Асинхронное сохранение списка паролей
-        Task<List<PasswordEntry>> LoadAsync(); // Асинхронная загрузка списка паролей
-        Task<PasswordEntry?> FindPasswordInFileAsync(string login); // Асинхронный поиск пароля
-        Task UpdatePasswordInFileAsync(string login, string newPassword, IEncryptor encryptor); // Асинхронное обновление пароля
+        Task SaveAsync(List<PasswordEntry> passwordList);
+        Task<List<PasswordEntry>> LoadAsync();
+        Task<PasswordEntry?> FindPasswordInFileAsync(string login);
+        Task UpdatePasswordInFileAsync(string login, string newPassword, IEncryptor encryptor);
     }
 }

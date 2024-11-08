@@ -1,6 +1,6 @@
 using MasterOfPasswords.Commands;
 
-namespace ConsoleManagerTests
+namespace MasterOfPasswords.Tests
 {
     public class ConsoleManagerTests
     {

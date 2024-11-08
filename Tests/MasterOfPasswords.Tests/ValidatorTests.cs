@@ -1,6 +1,6 @@
 using MasterOfPasswords.Authorization;
 
-namespace ValidatorTests;
+namespace MasterOfPasswords.Tests;
 
 public class ValidatorTests
 {

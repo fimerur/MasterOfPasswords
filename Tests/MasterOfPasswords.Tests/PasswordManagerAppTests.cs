@@ -6,7 +6,7 @@ using MasterOfPasswords.Storage;
 using MasterOfPasswords.User;
 using Moq;
 
-namespace PasswordManagerAppTests
+namespace MasterOfPasswords.Tests
 {
     public class MasterOfPasswordsAppTests
     {

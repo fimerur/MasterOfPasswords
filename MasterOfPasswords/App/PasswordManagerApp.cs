@@ -10,7 +10,7 @@ public class PasswordManagerApp : IPasswordManagerApp
 {
     private readonly IUser _user;
     private readonly IPasswordStore _passwordStore;
-    private readonly IConsoleManager _consoleManager; // Используем интерфейс
+    private readonly IConsoleManager _consoleManager;
     private readonly MenuHandler _menuHandler;
     private readonly Encryptor _encryptor;
 
@@ -20,7 +20,7 @@ public class PasswordManagerApp : IPasswordManagerApp
     {
         _user = user;
         _passwordStore = passwordStore;
-        _consoleManager = consoleManager; // Передаем интерфейс
+        _consoleManager = consoleManager;
         _menuHandler = new MenuHandler(this, consoleManager);
         _encryptor = new Encryptor();
     }
@@ -73,7 +73,7 @@ public class PasswordManagerApp : IPasswordManagerApp
             await _passwordStore.AddPasswordToFileAsync(entry);
             _consoleManager.WriteInformation("Пароль успешно добавлен.");
         }
-        catch (Exception ex)
+        catch (Exception ex)//??
         {
             _consoleManager.WriteError($"Произошла ошибка при добавлении пароля: {ex.Message}");
         }

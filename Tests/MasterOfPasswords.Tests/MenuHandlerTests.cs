@@ -2,7 +2,7 @@ using MasterOfPasswords.App;
 using MasterOfPasswords.Commands;
 using Moq;
 
-namespace MenuHandlerTests;
+namespace MasterOfPasswords.Tests;
 
 public class MenuHandlerTests
 {

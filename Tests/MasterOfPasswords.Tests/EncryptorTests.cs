@@ -1,6 +1,6 @@
 using MasterOfPasswords.Encryption;
 
-namespace EncryptorTests;
+namespace MasterOfPasswords.Tests;
 
 public class EncryptorTests
 {
