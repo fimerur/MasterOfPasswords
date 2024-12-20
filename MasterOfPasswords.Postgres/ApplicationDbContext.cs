@@ -4,18 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MasterOfPasswords.Postgres;
 
-public sealed class ApplicationDbContext : DbContext
+public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
     public DbSet<DbCredential> Credentials { get; set; } = null!;
 
-    public ApplicationDbContext()
-    {
-        Database.Migrate();
-    }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=passwordsDb;username=postgres;password=password");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
