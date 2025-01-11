@@ -31,7 +31,7 @@ public class Startup
         services.AddInfrastructureDbContext(Configuration);
         
         services.AddSingleton<IEncryptor, Encryptor>();
-        services.AddSingleton<ICredentialsService, CredentialsService>(); //?
+        services.AddSingleton<ICredentialsService, CredentialsService>();
 
 
         services.AddHttpContextAccessor();
