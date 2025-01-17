@@ -5,24 +5,19 @@
         Title="Password Manager" Width="400" Height="300"
         x:DataType="viewModels:MainViewModel">
     <StackPanel Margin="20">
-        <!-- Логин -->
-        <TextBlock Text="Login" />
+        <TextBlock  Name="Login" Text="Login" />
         <TextBox Text="{Binding Login}" Width="300" Margin="0,5" />
-
-        <!-- Пароль -->
+        
         <TextBlock Text="Password" />
         <TextBox Text="{Binding Password}" Width="300" Margin="0,5" />
-
-        <!-- Кнопка для добавления пароля -->
+        
         <Button Content="Add Password" Command="{Binding AddPasswordCommand}" Width="300" Margin="0,10" />
-
-        <!-- Кнопка для получения пароля -->
+        
         <Button Content="Get Password" Command="{Binding GetPasswordCommand}" Width="300" Margin="0,10" />
-
-        <!-- Кнопка для обновления пароля -->
+        
         <Button Content="Update Password" Command="{Binding UpdatePasswordCommand}" Width="300" Margin="0,10" />
-
-        <!-- Вывод информации о текущем пароле -->
+        <Button Content="Update Password111" Click="Button_OnClick" Width="300" Margin="0,10" />
+        
         <TextBlock Text="{Binding Password}" Width="300" Margin="0,10" />
     </StackPanel>
 </Window>

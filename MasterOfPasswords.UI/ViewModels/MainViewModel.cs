@@ -32,18 +32,16 @@ namespace MasterOfPasswords.UI.ViewModels
         public MainViewModel(ICredentialsService credentialsService)
         {
             _credentialsService = credentialsService;
-
-            // Инициализация команд
+            
             AddPasswordCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 try
                 {
-                    var credentialDto = new CredentialDto(Login, Password); // Передаем данные в конструктор
+                    var credentialDto = new CredentialDto(Login, Password);
                     await _credentialsService.AddPassword(credentialDto);
                 }
                 catch (Exception ex)
                 {
-                    // Обработать исключение, например, отобразить сообщение
                     Console.WriteLine($"Error adding password: {ex.Message}");
                 }
             });
@@ -53,11 +51,10 @@ namespace MasterOfPasswords.UI.ViewModels
                 try
                 {
                     var credential = await _credentialsService.GetPassword(Login);
-                    Password = credential.Password; // Устанавливаем полученный пароль
+                    Password = credential.Password;
                 }
                 catch (Exception ex)
                 {
-                    // Обработать исключение, например, отобразить сообщение
                     Console.WriteLine($"Error getting password: {ex.Message}");
                 }
             });
@@ -66,12 +63,11 @@ namespace MasterOfPasswords.UI.ViewModels
             {
                 try
                 {
-                    var updatedCredentialDto = new CredentialDto(Login, Password); // Передаем обновленные данные
+                    var updatedCredentialDto = new CredentialDto(Login, Password);
                     await _credentialsService.UpdatePassword(updatedCredentialDto);
                 }
                 catch (Exception ex)
                 {
-                    // Обработать исключение, например, отобразить сообщение
                     Console.WriteLine($"Error updating password: {ex.Message}");
                 }
             });

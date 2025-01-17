@@ -1,19 +1,15 @@
 ﻿using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace MasterOfPasswords.UI
+namespace MasterOfPasswords.UI;
+
+class Program
 {
-    class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            AppBuilder.Configure<App>()
-                .UsePlatformDetect()
-                .UseReactiveUI()
-                .StartWithClassicDesktopLifetime(args);
-        }
+        AppBuilder.Configure<App>()
+            .UsePlatformDetect()
+            .UseReactiveUI()
+            .StartWithClassicDesktopLifetime(args);
     }
 }

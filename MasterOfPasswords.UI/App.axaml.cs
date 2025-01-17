@@ -5,7 +5,7 @@ using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using MasterOfPasswords.Domain.Interfaces;
 using MasterOfPasswords.Domain;
-using MasterOfPasswords.Postgres; // Импортируем пространство имен для контекста базы данных
+using MasterOfPasswords.Postgres;
 using MasterOfPasswords.UI.Views;
 using MasterOfPasswords.Encryption;
 using MasterOfPasswords.UI.ViewModels;
@@ -27,19 +27,15 @@ namespace MasterOfPasswords.UI
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 var serviceCollection = new ServiceCollection();
-
-                // Регистрация зависимостей
-                serviceCollection.AddSingleton<IEncryptor, Encryptor>(); // Регистрация IEncryptor
-                serviceCollection.AddSingleton<ICredentialsService, CredentialsService>(); // Регистрация ICredentialsService
-
-                // Регистрация контекста базы данных с строкой подключения
+                
+                serviceCollection.AddSingleton<IEncryptor, Encryptor>();
+                serviceCollection.AddSingleton<ICredentialsService, CredentialsService>();
+                
                 serviceCollection.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=postgres;Database=Credentials")); // Замените на вашу строку подключения
-
-                // Строим контейнер зависимостей
+                    options.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=postgres;Database=Credentials"));
+                
                 Services = serviceCollection.BuildServiceProvider();
-
-                // Создаем окно и передаем в него зависимости через DataContext
+                
                 desktop.MainWindow = new MainWindow
                 {
                     DataContext = new MainViewModel(Services.GetRequiredService<ICredentialsService>())

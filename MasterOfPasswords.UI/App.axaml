@@ -2,13 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="MasterOfPasswords.UI.App"
              RequestedThemeVariant="Default">
-    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
     <Application.Styles>
-        <FluentTheme />  <!-- Устанавливаем Fluent стиль для приложения -->
-
-        <!-- Можно добавить дополнительные стили или темы, если потребуется -->
-        <!-- <StyleInclude Source="resm:MasterOfPasswords.UI.Styles?assembly=MasterOfPasswords.UI" /> -->
+        <FluentTheme />
+        
     </Application.Styles>
 
     <Application.DataTemplates>

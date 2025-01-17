@@ -7,6 +7,7 @@ using MasterOfPasswords.Encryption;
 using MasterOfPasswords.Postgres;
 using MasterOfPasswords.Web.Infrastructure.Extensions;
 using MasterOfPasswords.Web.Infrastructure.Middlewares;
+using CredentialsService = MasterOfPasswords.Web.Controllers.CredentialsService;
 
 namespace MasterOfPasswords.Web;
 

@@ -1,3 +1,4 @@
+using System.Threading;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using MasterOfPasswords.UI.ViewModels;
@@ -11,12 +12,24 @@ namespace MasterOfPasswords.UI
         public MainWindow()
         {
             InitializeComponent();
-
-            // Получаем экземпляр ICredentialsService из контейнера зависимостей
+            
             var credentialsService = App.Services.GetRequiredService<ICredentialsService>();
-
-            // Передаем credentialsService в конструктор MainViewModel
+            
             DataContext = new MainViewModel(credentialsService);
+
+
+            var currentThread = Thread.CurrentThread.ManagedThreadId;
+
+
+            var t = new Thread(x =>
+            {
+                var thread = Thread.CurrentThread.ManagedThreadId;
+                var tb = this.FindControl<TextBlock>("Login");
+                tb.Text = "My Silli Control";
+            });
+            
+            t.Start();
+
         }
 
         private void InitializeComponent()

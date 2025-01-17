@@ -1,33 +1,90 @@
 using MasterOfPasswords.Domain.Interfaces;
 using MasterOfPasswords.Encryption;
+using MasterOfPasswords.Encryption.Helpers;
+using MasterOfPasswords.Mapper;
 using MasterOfPasswords.Models;
-using Microsoft.AspNetCore.Mvc;
+using MasterOfPasswords.Postgres;
+using Microsoft.EntityFrameworkCore;
 
 namespace MasterOfPasswords.Web.Controllers;
 
-[Route("api/credentials")]
-[ApiController]
-[Produces("application/json")]
-public class CredentialsController(ICredentialsService credentialsService, IEncryptor encryptor) : ControllerBase
+public class CredentialsService(IEncryptor encryptor, IServiceProvider serviceProvider) : ICredentialsService
 {
-    // POST: api/password
-    [HttpPost("create")]
-    public async Task AddPassword([FromBody] CredentialDto credentialDto)
+    public async Task AddPassword(CredentialDto credentialDto)
     {
-        await credentialsService.AddPassword(credentialDto);
+        if (string.IsNullOrWhiteSpace(credentialDto.Login))
+            throw new ArgumentException("Логин не может быть пустым.", nameof(credentialDto.Login));
+
+        if (string.IsNullOrWhiteSpace(credentialDto.Password))
+            throw new ArgumentException("Пароль не может быть пустым.", nameof(credentialDto.Password));
+
+        var salt = EncryptionHelper.GenerateSalt();
+        var encryptedPassword = encryptor.Encrypt(credentialDto.Password, salt);
+
+        var dbCredential = new DbCredential()
+        {
+            Id = Guid.NewGuid(),
+            Login = credentialDto.Login,
+            Password = encryptedPassword,
+            Salt = salt
+        };
+
+        using (var scope = serviceProvider.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            
+            await dbContext.Credentials.AddAsync(dbCredential);
+            await dbContext.SaveChangesAsync();
+        }
     }
 
-    // GET: api/password/{login}
-    [HttpGet("{login}")]
     public async Task<CredentialDto> GetPassword(string login)
     {
-        return await credentialsService.GetPassword(login);
+        using (var scope = serviceProvider.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+
+            var dbCredential = await dbContext.Credentials
+                .Where(c => c.Login == login)
+                .FirstOrDefaultAsync();
+
+
+            if (dbCredential == null)
+                throw new Exception("Логин не может быть пустым.");
+
+            dbCredential.Password = encryptor.Decrypt(dbCredential.Password, dbCredential.Salt);
+            return CredentialDtoMapper.Map(dbCredential);
+        }
     }
 
-    // PUT: api/password/{login}
-    [HttpPut("update")]
-    public async Task UpdatePassword([FromBody]CredentialDto credentialDto)
+    public async Task UpdatePassword(CredentialDto updatedCredentialDto)
     {
-        await credentialsService.UpdatePassword(credentialDto);
+        using (var scope = serviceProvider.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+            if (string.IsNullOrWhiteSpace(updatedCredentialDto.Login))
+                throw new ArgumentException("Логин не может быть пустым.", nameof(updatedCredentialDto.Login));
+
+            if (string.IsNullOrWhiteSpace(updatedCredentialDto.Password))
+                throw new ArgumentException("Пароль не может быть пустым.", nameof(updatedCredentialDto.Password));
+
+            var dbCredential = await dbContext.Credentials
+                .Where(c => c.Login == updatedCredentialDto.Login)
+                .FirstOrDefaultAsync();
+
+            if (dbCredential == null)
+                throw new Exception("Логин не может быть пустым");
+
+            var salt = EncryptionHelper.GenerateSalt();
+            var encryptedPassword = encryptor.Encrypt(updatedCredentialDto.Password, salt);
+
+            dbCredential.Login = updatedCredentialDto.Login;
+            dbCredential.Password = encryptedPassword;
+            dbCredential.Salt = salt;
+
+            await dbContext.SaveChangesAsync();
+        }
     }
 }
